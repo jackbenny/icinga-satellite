@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+
+  icinga:
+    build:
+      context: ./image-files
+      dockerfile: Dockerfile
+    environment:
+      - HOST=
+      - MASTERHOST=
+      - MASTERPORT=5665
+      - PARENTZONE=
+      - TICKET=
