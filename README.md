@@ -7,7 +7,7 @@ is instead to create an easy-to-deploy satellite Docker.
 Everything is controlled using the follwing environment variables.
 
 * **CN** is the Common Name of the satellite
-* **ZONE** is the Zone name in which the satellite is. If no zone is specified
+* **ZONE** is the zone in which this satellite should be in. If no zone is specified
   it defaults to using the **CN** as the zone.
 * **PARENTCN** is the Common Name of the parent host, for example the master. If
   no **PARENTCN** is specified it defaults to using the **PARENTHOST** as a
