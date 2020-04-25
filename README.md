@@ -16,12 +16,12 @@ Everything is controlled using the follwing environment variables.
 * **PARENTPORT** is the Icinga2 port on the parent host. Defaults to 5665.
 * **TICKET** is the ticket you get from the master (if you are using Director
   you find it under the Agent tab of the host).
-* **ACCEPT_CONFIG** takes a *y* or *n* value for yes or no. The default is
-  *n*(o).
-* **ACCEPT_COMMANDS** takes a *y* or *n* value for yes or no. The default is
-  *n*(o).
-* **DISABLE_CONFD** takes a *y* or *n* value for yes or no. The default is
-  *y*(es). This should be a sane default for most people.
+* **ACCEPT_CONFIG** takes a ***y*** or ***n*** value for yes or no. The default is
+  ***n***.
+* **ACCEPT_COMMANDS** takes a ***y*** or ***n*** value for yes or no. The default is
+  ***n***.
+* **DISABLE_CONFD** takes a ***y*** or ***n*** value for yes or no. The default is
+  ***y***. This should be a sane default for most people.
 
 ## Example usage
 ```
