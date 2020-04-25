@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# If parent cn is not specified, default it to the parent host.
-# If the zone if not specified, default it to the cn of the satellite/agent.
+# If parent CN is not specified, default it to the parent host.
+# If the zone if not specified, default it to the CN of the satellite/agent.
 # Use the default port if none is specified.
 
 if [ -z "$PARENTCN" ]; then
@@ -16,6 +16,26 @@ if [ -z "$PARENTPORT" ]; then
     PARENTPORT=5665
 fi
 
+# Set accept config and accept commands (defaults to no)
+if [ "$ACCEPT_CONFIG" == "y" ]; then
+    ACCEPT_CONF="--accept-config"
+else
+    ACCEPT_CONF=" "
+fi
+
+if [ "$ACCEPT_COMMANDS" == "y" ]; then
+    ACCEPT_COMM="--accept-commands"
+else
+    ACCEPT_COMM=" "
+fi
+
+# Defaults to disable conf.d (so to "n" or anything else to enable inclusion of
+# conf.d directory
+if [ -z "$DISABLE_CONFD" ] || [ "$DISABLE_CONFD" == "y" ]; then
+    DISABLE_CONF="--disable-confd"
+else
+    DISABLE_CONF=" "
+fi
 
 icinga2 pki new-cert --cn "$CN" \
 --key /var/lib/icinga2/certs/"${CN}".key \
@@ -33,5 +53,6 @@ icinga2 node setup --ticket "$TICKET" \
 --parent_zone "$PARENTZONE" \
 --parent_host "$PARENTHOST" \
 --trustedcert /var/lib/icinga2/certs/"${PARENTCN}".crt \
---accept-commands --accept-config \
---disable-confd
+$ACCEPT_CONF \
+$ACCEPT_COMM \
+$DISABLE_CONF

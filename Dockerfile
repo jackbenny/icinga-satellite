@@ -8,6 +8,7 @@ RUN printf "deb http://packages.icinga.com/ubuntu icinga-bionic main\ndeb-src ht
     chown -R nagios:nagios /var/lib/icinga2/certs
 
 COPY create-satellite.sh /create-satellite.sh
-RUN chmod +x /create-satellite.sh
+COPY run-icinga.sh /run-icinga.sh
+RUN chmod +x /create-satellite.sh ; chmod +x /run-icinga.sh
 
-CMD /create-satellite.sh ; /usr/sbin/icinga2 daemon
+ENTRYPOINT ["/run-icinga.sh"]
