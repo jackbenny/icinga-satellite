@@ -6,8 +6,9 @@ services:
       context: ./image-files
       dockerfile: Dockerfile
     environment:
-      - HOST=
-      - MASTERHOST=
-      - MASTERPORT=5665
+      - CN=
+      - ZONE=
+      - PARENTHOST=
+      - PARENTCN=
       - PARENTZONE=
       - TICKET=
