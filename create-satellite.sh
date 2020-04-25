@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # If parent CN is not specified, default it to the parent host.
-# If the zone if not specified, default it to the CN of the satellite/agent.
+# If the zone is not specified, default it to the CN of the satellite/agent.
 # Use the default port if none is specified.
 
 if [ -z "$PARENTCN" ]; then
@@ -29,8 +29,8 @@ else
     ACCEPT_COMM=" "
 fi
 
-# Defaults to disable conf.d (so to "n" or anything else to enable inclusion of
-# conf.d directory
+# Defaults to disable conf.d (so use "n" or anything else other than "y" 
+# to enable inclusion of conf.d directory)
 if [ -z "$DISABLE_CONFD" ] || [ "$DISABLE_CONFD" == "y" ]; then
     DISABLE_CONF="--disable-confd"
 else
