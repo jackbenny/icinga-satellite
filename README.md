@@ -55,5 +55,6 @@ services:
 
 ## Images
 There are two available images for you to choose from. The default one (0.*n*) is based on
-Debian 10, with Icinga2 from Icings official repository. The other image (0.*n*-alpine) is
-based on Alpine 3.11, with Icinga2 from Alpines repository. The Alpine image is much smaller.
+Debian 10, with Icinga2 from Icingas official repository. The other image (0.*n*-alpine) is
+based on Alpine 3.11, with Icinga2 from Alpines repository. The Alpine image is much smaller
+in size.
