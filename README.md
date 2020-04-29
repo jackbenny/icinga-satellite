@@ -17,15 +17,18 @@ Everything is controlled using the follwing environment variables.
 * **TICKET** is the ticket you get from the master (if you are using Director
   you find it under the Agent tab of the host).
 * **ACCEPT_CONFIG** takes a ***y*** or ***n*** value for yes or no. The default is
-  ***n***.
+  ***n***
 * **ACCEPT_COMMANDS** takes a ***y*** or ***n*** value for yes or no. The default is
-  ***n***.
+  ***n***
 * **DISABLE_CONFD** takes a ***y*** or ***n*** value for yes or no. The default is
   ***y***. This should be a sane default for most people.
+* **LOCAL_TIMEZONE** sets the local timezone of the satellite. For example
+  *Europe/Stockholm* or *America/New_York*
 
 ## Example usage
 ```
 #> docker run -d --name my-icinga-sat \
+  -p 5665:5665 \
   -e CN=icinga-sat02.local \
   -e PARENTHOST=icinga-master.local \
   -e PARENTCN=icinga-master.local \
@@ -41,6 +44,9 @@ version: "3.8"
 services:
   my-icinga-sat:
     image: jackbenny/icinga-satellite
+    ports:
+      - 5665:5665
+    restart:always
     environment:
       - CN=icinga-sat02.local
       - ZONE=icinga-sat02.local
@@ -51,13 +57,15 @@ services:
       - ACCEPT_CONFIG=y
       - ACCEPT_COMMANDS=y
       - DISABLE_CONFD=y
+      - LOCAL_TIMEZONE=Europe/Stockholm
 ```
 
 ## Images
-There are two available images for you to choose from. The default one (0.*n*) is based on
-Debian 10, with Icinga2 from Icingas official repository. The other image (0.*n*-alpine) is
-based on Alpine latest, with Icinga2 from Alpines repository. The Alpine image is much
-smaller in size.
 
-> **Note:** Version 0.1-alpine uses Alpine 3.11. Version 0.1.1-alpine and up uses Alpine
-> latest.
+> **NOTE:** Currently there are some problems with the Alpine image. Use the main image
+> instead, tagged *0.n*.
+
+There are two available images for you to choose from. The default one (0.*n*) is based on
+Ubuntu 18.04, with Icinga2 from Icingas official repository. The other image (0.*n*-alpine) is
+based on Alpine 3.11, with Icinga2 from Alpines repository. From 0.1.1-alpine and up, the Alpine
+image is built on the latest Alpine. The Alpine image is much smaller in size.
