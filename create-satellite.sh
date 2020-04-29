@@ -37,6 +37,11 @@ else
     DISABLE_CONF=" "
 fi
 
+# Set the local timezone
+if [ ! -z "$LOCAL_TIMEZONE" ]; then
+	ln -sf /usr/share/zoneinfo/"$LOCAL_TIMEZONE" /etc/localtime
+fi
+
 icinga2 pki new-cert --cn "$CN" \
 --key /var/lib/icinga2/certs/"${CN}".key \
 --cert /var/lib/icinga2/certs/"${CN}".crt
