@@ -1,4 +1,4 @@
-FROM alpine:3.11
+FROM alpine:latest
 RUN apk update && \
     apk add bash && \
     apk add icinga2 && \
