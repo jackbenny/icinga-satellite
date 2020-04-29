@@ -26,6 +26,7 @@ Everything is controlled using the follwing environment variables.
 ## Example usage
 ```
 #> docker run -d --name my-icinga-sat \
+  -p 5665:5665 \
   -e CN=icinga-sat02.local \
   -e PARENTHOST=icinga-master.local \
   -e PARENTCN=icinga-master.local \
@@ -41,6 +42,8 @@ version: "3.8"
 services:
   my-icinga-sat:
     image: jackbenny/icinga-satellite
+    ports:
+      - 5665:5665
     environment:
       - CN=icinga-sat02.local
       - ZONE=icinga-sat02.local
@@ -54,6 +57,10 @@ services:
 ```
 
 ## Images
+
+> **NOTE:** Currently there are some problems with the Alpine image. Use the main image
+> instead, tagged *0.n*.
+
 There are two available images for you to choose from. The default one (0.*n*) is based on
 Debian 10, with Icinga2 from Icingas official repository. The other image (0.*n*-alpine) is
 based on Alpine 3.11, with Icinga2 from Alpines repository. The Alpine image is much smaller
