@@ -1,7 +1,7 @@
 FROM ubuntu:18.04
 RUN apt-get update && apt-get install wget gnupg -y && \
-    wget -O - https://packages.icinga.com/icinga.key | apt-key add -
-RUN printf "deb http://packages.icinga.com/ubuntu icinga-bionic main\ndeb-src http://packages.icinga.com/ubuntu icinga-bionic main" > /etc/apt/sources.list.d/icinga2.list && \
+    printf "deb http://packages.icinga.com/ubuntu icinga-bionic main\ndeb-src http://packages.icinga.com/ubuntu icinga-bionic main" > /etc/apt/sources.list.d/icinga2.list && \
+    wget -O - https://packages.icinga.com/icinga.key | apt-key add - && \
     apt-get update && apt-get --no-install-recommends install icinga2 monitoring-plugins tzdata -y && \
     mkdir /run/icinga2 && chown nagios:nagios /run/icinga2 && \
     mkdir -p /var/lib/icinga2/certs && \

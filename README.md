@@ -6,7 +6,8 @@ is instead to create an easy-to-deploy satellite Docker.
 ## Tags
 
 ### Main tags
-* **0.3, latest**
+* **0.4, latest**
+* **0.3**
 * **0.2**
 * **0.1**
 
