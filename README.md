@@ -3,8 +3,27 @@ An easy-to-use Dockerized Icinga2 satellite setup. It could be used as an
 Icinga2 agent aswell, but I don't think that would make much sense. The goal
 is instead to create an easy-to-deploy satellite Docker.
 
+## Tags
+
+### Main tags
+* **0.3, latest**
+* **0.2**
+* **0.1**
+
+### Alpine tags (currently has some problems)
+* **0.1.1-alpine**
+* **0.1-alpine**
+
+> **NOTE:** Currently there are some problems with the Alpine image. Use the main images
+> instead, tagged *0.n*.
+
+There are two available images for you to choose from. The default ones (0.*n*) are based on
+Ubuntu 18.04, with Icinga2 from Icingas official repository. The other images (0.*n*-alpine) is
+based on Alpine 3.11, with Icinga2 from Alpines repository. From 0.1.1-alpine and up, the Alpine
+image is built on the latest Alpine.
+
 ## Environment variables
-Everything is controlled using the follwing environment variables.
+Everything is controlled using the following environment variables.
 
 * **CN** is the Common Name of the satellite
 * **ZONE** is the zone in which this satellite should be in. If no zone is specified
@@ -60,12 +79,4 @@ services:
       - LOCAL_TIMEZONE=Europe/Stockholm
 ```
 
-## Images
 
-> **NOTE:** Currently there are some problems with the Alpine image. Use the main image
-> instead, tagged *0.n*.
-
-There are two available images for you to choose from. The default one (0.*n*) is based on
-Ubuntu 18.04, with Icinga2 from Icingas official repository. The other image (0.*n*-alpine) is
-based on Alpine 3.11, with Icinga2 from Alpines repository. From 0.1.1-alpine and up, the Alpine
-image is built on the latest Alpine. The Alpine image is much smaller in size.
