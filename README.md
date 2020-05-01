@@ -1,27 +1,37 @@
 # icinga-satellite
 An easy-to-use Dockerized Icinga2 satellite setup. It could be used as an
 Icinga2 agent aswell, but I don't think that would make much sense. The goal
-is instead to create an easy-to-deploy satellite Docker.
+is instead to create an easy-to-deploy satellite image.
 
-## Tags
+![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/jackbenny/icinga-satellite?sort=date)
+![Docker Pulls](https://img.shields.io/docker/pulls/jackbenny/icinga-satellite)
+![Docker Stars](https://img.shields.io/docker/stars/jackbenny/icinga-satellite)
+![Docker Cloud Automated build](https://img.shields.io/docker/cloud/automated/jackbenny/icinga-satellite)
+![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/jackbenny/icinga-satellite)
+
+## Tags and their respective Dockerfile
 
 ### Main tags
-* **0.4, latest**
-* **0.3**
-* **0.2**
-* **0.1**
+* [0.5, latest](https://github.com/jackbenny/icinga-satellite/blob/master/Dockerfile)
+* [0.4](https://github.com/jackbenny/icinga-satellite/blob/0.4/Dockerfile)
+* [0.3](https://github.com/jackbenny/icinga-satellite/blob/0.3/Dockerfile)
+* [0.2](https://github.com/jackbenny/icinga-satellite/blob/0.2/Dockerfile)
+* [0.1](https://github.com/jackbenny/icinga-satellite/blob/0.1/Dockerfile)
 
 ### Alpine tags (currently has some problems)
-* **0.1.1-alpine**
-* **0.1-alpine**
+* [0.1.1-alpine](https://github.com/jackbenny/icinga-satellite/blob/0.1.1-alpine/Dockerfile)
+* [0.1-alpine](https://github.com/jackbenny/icinga-satellite/blob/0.1-alpine/Dockerfile)
 
-> **NOTE:** Currently there are some problems with the Alpine image. Use the main images
-> instead, tagged *0.n*.
+> **NOTE:** Currently there are some problems with the Alpine image. 
+> Use the *main images* instead, tagged *0.n*.
 
-There are two available images for you to choose from. The default ones (0.*n*) are based on
-Ubuntu 18.04, with Icinga2 from Icingas official repository. The other images (0.*n*-alpine) is
-based on Alpine 3.11, with Icinga2 from Alpines repository. From 0.1.1-alpine and up, the Alpine
-image is built on the latest Alpine.
+There are two available images for you to choose from. The main images (0.*n*) are based on
+Debian 10-slim from tag 0.5 and up. Previous to 0.5 they were based on Ubuntu 18.04. 
+The main images uses Icinga2 from Icingas official repository. 
+
+The other images (0.*n*-alpine) are based on Alpine with Icinga2 from Alpines repository. 
+From 0.1.1-alpine and up, the Alpine images are built on the latest Alpine image. Previous to
+0.1.1 they were based on Alpine 3.11.
 
 ## Environment variables
 Everything is controlled using the following environment variables.

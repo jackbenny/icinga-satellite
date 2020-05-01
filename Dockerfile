@@ -1,6 +1,6 @@
-FROM ubuntu:18.04
+FROM debian:10-slim
 RUN apt-get update && apt-get install wget gnupg -y && \
-    printf "deb http://packages.icinga.com/ubuntu icinga-bionic main\ndeb-src http://packages.icinga.com/ubuntu icinga-bionic main" > /etc/apt/sources.list.d/icinga2.list && \
+    printf "deb http://packages.icinga.com/debian icinga-buster main\ndeb-src http://packages.icinga.com/debian icinga-buster main" > /etc/apt/sources.list.d/icinga2.list && \
     wget -O - https://packages.icinga.com/icinga.key | apt-key add - && \
     apt-get update && apt-get --no-install-recommends install icinga2 monitoring-plugins tzdata -y && \
     mkdir /run/icinga2 && chown nagios:nagios /run/icinga2 && \
