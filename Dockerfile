@@ -1,4 +1,5 @@
 FROM debian:10-slim
+LABEL maintainer="Jack-Benny Persson <jack-benny@cyberinfo.se>"
 RUN apt-get update && apt-get install wget gnupg -y && \
     printf "deb http://packages.icinga.com/debian icinga-buster main\ndeb-src http://packages.icinga.com/debian icinga-buster main" > /etc/apt/sources.list.d/icinga2.list && \
     wget -O - https://packages.icinga.com/icinga.key | apt-key add - && \

@@ -29,6 +29,11 @@ else
     ACCEPT_COMM=" "
 fi
 
+# Support for ticket via secrets for Docker Swarm
+if [ ! -z "$TICKET_PATH" ]; then
+    TICKET=$(cat $TICKET_PATH)
+fi
+
 # Defaults to disable conf.d (so use "n" or anything else other than "y" 
 # to enable inclusion of conf.d directory)
 if [ -z "$DISABLE_CONFD" ] || [ "$DISABLE_CONFD" == "y" ]; then

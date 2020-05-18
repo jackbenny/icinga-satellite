@@ -12,7 +12,8 @@ is instead to create an easy-to-deploy satellite image.
 ## Tags and their respective Dockerfile
 
 ### Main tags
-* [0.5, latest](https://github.com/jackbenny/icinga-satellite/blob/master/Dockerfile)
+* [0.6, latest](https://github.com/jackbenny/icinga-satellite/blob/master/Dockerfile)
+* [0.5](https://github.com/jackbenny/icinga-satellite/blob/0.5/Dockerfile)
 * [0.4](https://github.com/jackbenny/icinga-satellite/blob/0.4/Dockerfile)
 * [0.3](https://github.com/jackbenny/icinga-satellite/blob/0.3/Dockerfile)
 * [0.2](https://github.com/jackbenny/icinga-satellite/blob/0.2/Dockerfile)
@@ -46,6 +47,10 @@ Everything is controlled using the following environment variables.
 * **PARENTPORT** is the Icinga2 port on the parent host. Defaults to 5665.
 * **TICKET** is the ticket you get from the master (if you are using Director
   you find it under the Agent tab of the host).
+* **TICKET_PATH** is the path to the ticket secrets file if you use Swarm and wants to use
+  secrets instead (to keep your ticket secure). The ticket should be on ONE line only 
+  and be created as an external secret. This variable is optional and only apply for
+  Docker Swarm.
 * **ACCEPT_CONFIG** takes a ***y*** or ***n*** value for yes or no. The default is
   ***n***
 * **ACCEPT_COMMANDS** takes a ***y*** or ***n*** value for yes or no. The default is
@@ -90,4 +95,25 @@ services:
       - LOCAL_TIMEZONE=Europe/Stockholm
 ```
 
+## docker-compose.yml example with Docker secrets
+```
+version: "3.8"
+services:
+  my-icinga-sat:
+    image: jackbenny/icinga-satellite
+    environment:
+      - CN=icinga-sat02.local
+      - PARENTHOST=icinga-master.local
+      - PARENTZONE=master
+      - TICKET_PATH=/var/run/secrets/ticket
+      - ACCEPT_CONFIG=y
+      - ACCEPT_COMMANDS=y
+      - DISABLE_CONFD=y
+      - LOCAL_TIMEZONE=Europe/Stockholm
+    secrets:
+      - ticket
+secrets:
+  ticket:
+    external: true
+```
 
