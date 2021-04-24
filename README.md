@@ -26,39 +26,45 @@ is instead to create an easy-to-deploy satellite image.
 > **NOTE:** Currently there are some problems with the Alpine image. 
 > Use the *main images* instead, tagged *0.n*.
 
-There are two available images for you to choose from. The main images (0.*n*) are based on
-Debian 10-slim from tag 0.5 and up. Previous to 0.5 they were based on Ubuntu 18.04. 
-The main images uses Icinga2 from Icingas official repository. 
+There are two available images for you to choose from. The main images (0.*n*)
+are based on Debian 10-slim from tag 0.5 and up. Previous to 0.5 they were
+based on Ubuntu 18.04. The main images uses Icinga2 from Icingas official
+repository. 
 
-The other images (0.*n*-alpine) are based on Alpine with Icinga2 from Alpines repository. 
-From 0.1.1-alpine and up, the Alpine images are built on the latest Alpine image. Previous to
-0.1.1 they were based on Alpine 3.11.
+The other images (0.*n*-alpine) are based on Alpine with Icinga2 from Alpines
+repository. From 0.1.1-alpine and up, the Alpine images are built on the latest
+Alpine image. Previous to 0.1.1 they were based on Alpine 3.11.
 
 ## Environment variables
 Everything is controlled using the following environment variables.
 
 * **CN** is the Common Name of the satellite
-* **ZONE** is the zone in which this satellite should be in. If no zone is specified
-  it defaults to using the **CN** as the zone.
-* **PARENTCN** is the Common Name of the parent host, for example the master. If
-  no **PARENTCN** is specified it defaults to using the **PARENTHOST** as a
+* **ZONE** is the zone in which this satellite should be in. If no zone is
+  specified it defaults to using the **CN** as the zone.
+* **PARENTCN** is the Common Name of the parent host, for example the master.
+  If no **PARENTCN** is specified it defaults to using the **PARENTHOST** as a
   **PARENTCN**
 * **PARENTHOST** is the FQDN or IP of the parent host, for example the master.
 * **PARENTPORT** is the Icinga2 port on the parent host. Defaults to 5665.
 * **TICKET** is the ticket you get from the master (if you are using Director
   you find it under the Agent tab of the host).
-* **TICKET_PATH** is the path to the ticket secrets file if you use Swarm and wants to use
-  secrets instead (to keep your ticket secure). The ticket should be on ONE line only 
-  and be created as an external secret. This variable is optional and only apply for
-  Docker Swarm.
-* **ACCEPT_CONFIG** takes a ***y*** or ***n*** value for yes or no. The default is
-  ***n***
-* **ACCEPT_COMMANDS** takes a ***y*** or ***n*** value for yes or no. The default is
-  ***n***
-* **DISABLE_CONFD** takes a ***y*** or ***n*** value for yes or no. The default is
-  ***y***. This should be a sane default for most people.
+* **TICKET_PATH** is the path to the ticket secrets file if you use Swarm and
+  wants to use secrets instead (to keep your ticket secure). The ticket should
+  be on ONE line only and be created as an external secret. This variable is
+  optional and only apply for Docker Swarm.
+* **ACCEPT_CONFIG** takes a ***y*** or ***n*** value for yes or no. The default
+  is ***n***
+* **ACCEPT_COMMANDS** takes a ***y*** or ***n*** value for yes or no. The
+  default is ***n***
+* **DISABLE_CONFD** takes a ***y*** or ***n*** value for yes or no. The default
+  is ***y***. This should be a sane default for most people.
 * **LOCAL_TIMEZONE** sets the local timezone of the satellite. For example
   *Europe/Stockholm* or *America/New_York*
+
+## Mounts
+You need to mount `/var/lib/icinga2` and `/var/cache/icinga2` somewhere on your
+filesystem to preserve the state of the satellite between restarts. See the
+examples below.
 
 ## Example usage
 ```
@@ -70,6 +76,8 @@ Everything is controlled using the following environment variables.
   -e PARENTZONE=master \
   -e TICKET=124de0573705d1133db62a974aaf \
   -e DISABLE_CONFD=y -e ACCEPT_CONFIG=y -e ACCEPT_COMMANDS=y \ 
+  -v /var/lib/icinga2:/var/lib/icinga2 \ 
+  -v /var/cache/icinga2:/var/cache/icinga2 \ 
    jackbenny/icinga-satellite
 ```
 
@@ -93,6 +101,9 @@ services:
       - ACCEPT_COMMANDS=y
       - DISABLE_CONFD=y
       - LOCAL_TIMEZONE=Europe/Stockholm
+    volumes:
+      - /var/lib/icinga2:/var/lib/icinga2
+      - /var/cache/icinga2:/var/cache/icinga2
 ```
 
 ## docker-compose.yml example with Docker secrets
@@ -110,6 +121,9 @@ services:
       - ACCEPT_COMMANDS=y
       - DISABLE_CONFD=y
       - LOCAL_TIMEZONE=Europe/Stockholm
+    volumes:
+      - /var/lib/icinga2:/var/lib/icinga2
+      - /var/cache/icinga2:/var/cache/icinga2
     secrets:
       - ticket
 secrets:
