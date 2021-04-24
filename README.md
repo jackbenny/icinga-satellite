@@ -12,7 +12,8 @@ is instead to create an easy-to-deploy satellite image.
 ## Tags and their respective Dockerfile
 
 ### Main tags
-* [0.6, latest](https://github.com/jackbenny/icinga-satellite/blob/master/Dockerfile)
+* [0.6.1, latest](https://github.com/jackbenny/icinga-satellite/blob/master/Dockerfile)
+* [0.6](https://github.com/jackbenny/icinga-satellite/blob/0.6/Dockerfile)
 * [0.5](https://github.com/jackbenny/icinga-satellite/blob/0.5/Dockerfile)
 * [0.4](https://github.com/jackbenny/icinga-satellite/blob/0.4/Dockerfile)
 * [0.3](https://github.com/jackbenny/icinga-satellite/blob/0.3/Dockerfile)
